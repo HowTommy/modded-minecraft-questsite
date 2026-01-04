@@ -1,0 +1,18 @@
+<div class="toast-container">
+  <div *ngFor="let toast of toasts$ | async"
+       class="minecraft-toast"
+       [class.success]="toast.isSuccess"
+       [class.uncompleted]="!toast.isSuccess"
+       [style.bottom.px]="40 + (toast.offsetIndex * 100)">
+    <div class="toast-icon">{{ toast.isSuccess ? '✓' : '✗' }}</div>
+    <div class="toast-content">
+      <div class="toast-text minecraft-font">
+        <span *ngIf="toast.isSuccess">+{{ toast.points }} points!</span>
+        <span *ngIf="!toast.isSuccess">Quête non complétée</span>
+      </div>
+      <div class="toast-message" *ngIf="toast.message">
+        {{ toast.message }}
+      </div>
+    </div>
+  </div>
+</div>

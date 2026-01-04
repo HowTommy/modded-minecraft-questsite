@@ -1,19 +1,20 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IonicModule, ModalController } from '@ionic/angular';
+import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { Observable, combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { QuestDataService } from '../../core/services/quest-data.service';
 import { ProgressService } from '../../core/services/progress.service';
 import { AnimationService } from '../../core/services/animation.service';
+import { ToastService } from '../../core/services/toast.service';
 import { Category } from '../../core/models/category.model';
 import { Quest } from '../../core/models/quest.model';
 import { QuestProgress, ProgressStats } from '../../core/models/progress.model';
 import { ProgressBarComponent } from '../../ui/progress-bar/progress-bar.component';
 import { QuestCardComponent } from '../../ui/quest-card/quest-card.component';
 import { ConfettiComponent } from '../../ui/confetti/confetti.component';
-import { QuestToastComponent } from '../../ui/quest-toast/quest-toast.component';
+import { ToastContainerComponent } from '../../ui/toast-container/toast-container.component';
 
 interface QuestGroup {
   quests: Quest[];
@@ -25,7 +26,7 @@ interface QuestGroup {
   templateUrl: './category.page.html',
   styleUrls: ['./category.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, ProgressBarComponent, QuestCardComponent, ConfettiComponent],
+  imports: [IonicModule, CommonModule, ProgressBarComponent, QuestCardComponent, ConfettiComponent, ToastContainerComponent],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CategoryPage implements OnInit {
@@ -34,7 +35,6 @@ export class CategoryPage implements OnInit {
   categoryStats$!: Observable<ProgressStats | null>;
   questGroups$!: Observable<QuestGroup[]>;
   categoryNumero!: number;
-  private activeToasts: number = 0;
 
   constructor(
     private route: ActivatedRoute,
@@ -42,7 +42,7 @@ export class CategoryPage implements OnInit {
     private questDataService: QuestDataService,
     private progressService: ProgressService,
     public animationService: AnimationService,
-    private modalController: ModalController
+    private toastService: ToastService
   ) {}
 
   ngOnInit(): void {
@@ -182,30 +182,8 @@ export class CategoryPage implements OnInit {
 
     const newlyCompleted = !currentlyCompleted;
 
-    // Compter les toasts actifs
-    const currentOffset = this.activeToasts;
-    this.activeToasts++;
-
-    // Afficher le toast modal de manière asynchrone (sans bloquer)
-    this.modalController.create({
-      component: QuestToastComponent,
-      componentProps: {
-        points: quest.points,
-        isSuccess: newlyCompleted,
-        offsetIndex: currentOffset
-      },
-      cssClass: 'quest-toast-modal',
-      backdropDismiss: false,
-      showBackdrop: false,
-      animated: false
-    }).then(modal => {
-      modal.present();
-
-      // Décrémenter le compteur quand le modal se ferme
-      modal.onDidDismiss().then(() => {
-        this.activeToasts--;
-      });
-    });
+    // Afficher le toast
+    this.toastService.showToast(quest.points, newlyCompleted);
 
     if (newlyCompleted) {
       // Check if category is now 100% complete
