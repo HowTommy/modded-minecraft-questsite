@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IonicModule, ToastController } from '@ionic/angular';
+import { IonicModule, ModalController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { Observable, combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -13,6 +13,7 @@ import { QuestProgress, ProgressStats } from '../../core/models/progress.model';
 import { ProgressBarComponent } from '../../ui/progress-bar/progress-bar.component';
 import { QuestCardComponent } from '../../ui/quest-card/quest-card.component';
 import { ConfettiComponent } from '../../ui/confetti/confetti.component';
+import { QuestToastComponent } from '../../ui/quest-toast/quest-toast.component';
 
 interface QuestGroup {
   quests: Quest[];
@@ -33,6 +34,7 @@ export class CategoryPage implements OnInit {
   categoryStats$!: Observable<ProgressStats | null>;
   questGroups$!: Observable<QuestGroup[]>;
   categoryNumero!: number;
+  private activeToasts: number = 0;
 
   constructor(
     private route: ActivatedRoute,
@@ -40,7 +42,7 @@ export class CategoryPage implements OnInit {
     private questDataService: QuestDataService,
     private progressService: ProgressService,
     public animationService: AnimationService,
-    private toastController: ToastController
+    private modalController: ModalController
   ) {}
 
   ngOnInit(): void {
@@ -175,21 +177,37 @@ export class CategoryPage implements OnInit {
     return false;
   }
 
-  async onQuestToggle(quest: Quest, category: Category, currentlyCompleted: boolean): Promise<void> {
+  onQuestToggle(quest: Quest, category: Category, currentlyCompleted: boolean): void {
     this.progressService.toggleQuest(quest.numero);
 
     const newlyCompleted = !currentlyCompleted;
 
-    if (newlyCompleted) {
-      const toast = await this.toastController.create({
-        message: `+${quest.points} points!`,
-        duration: 2000,
-        position: 'top',
-        color: 'success',
-        cssClass: 'minecraft-toast'
-      });
-      await toast.present();
+    // Compter les toasts actifs
+    const currentOffset = this.activeToasts;
+    this.activeToasts++;
 
+    // Afficher le toast modal de manière asynchrone (sans bloquer)
+    this.modalController.create({
+      component: QuestToastComponent,
+      componentProps: {
+        points: quest.points,
+        isSuccess: newlyCompleted,
+        offsetIndex: currentOffset
+      },
+      cssClass: 'quest-toast-modal',
+      backdropDismiss: false,
+      showBackdrop: false,
+      animated: false
+    }).then(modal => {
+      modal.present();
+
+      // Décrémenter le compteur quand le modal se ferme
+      modal.onDidDismiss().then(() => {
+        this.activeToasts--;
+      });
+    });
+
+    if (newlyCompleted) {
       // Check if category is now 100% complete
       setTimeout(() => {
         const stats = this.progressService.getCategoryProgress(category);
@@ -197,14 +215,6 @@ export class CategoryPage implements OnInit {
           this.animationService.triggerConfetti();
         }
       }, 100);
-    } else {
-      const toast = await this.toastController.create({
-        message: 'Quête non complétée',
-        duration: 2000,
-        position: 'top',
-        color: 'medium'
-      });
-      await toast.present();
     }
   }
 

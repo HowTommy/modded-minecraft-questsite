@@ -29,7 +29,7 @@
       }
 
       ion-button {
-        --color: #FFFFFF;
+        --color: #000000;
         opacity: 0.8;
       }
     }
@@ -46,10 +46,11 @@
     }
 
     ion-button {
-      --color: #5FCDE4;
+      --color: #000000;
       font-size: 11px;
       text-transform: none;
       margin-right: 4px;
+      text-decoration: underline;
     }
   }
 
@@ -95,8 +96,8 @@
   padding: 4px;
 
   .checkbox-box {
-    width: 32px;
-    height: 32px;
+    width: 40px;
+    height: 40px;
     background: #CCCCCC;
     box-shadow:
       0 -2px 0 0 #000000,
@@ -111,11 +112,11 @@
     transition: background 0.1s;
 
     &.checked {
-      background: var(--minecraft-green);
+      background: #4CAF50;
     }
 
     .checkmark {
-      font-size: 24px;
+      font-size: 30px;
       color: #000000;
       font-weight: bold;
       line-height: 1;
@@ -135,7 +136,7 @@
 
   p {
     margin: 0;
-    color: var(--minecraft-light-gray);
+    color: #222222;
   }
 }
 

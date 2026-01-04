@@ -1,0 +1,9 @@
+<div class="toast-backdrop">
+  <div class="minecraft-toast" [class.success]="isSuccess" [class.uncompleted]="!isSuccess" (click)="close()">
+    <div class="toast-icon">{{ isSuccess ? '✓' : '✗' }}</div>
+    <div class="toast-text minecraft-font">
+      <span *ngIf="isSuccess">+{{ points }} points!</span>
+      <span *ngIf="!isSuccess">Quête non complétée</span>
+    </div>
+  </div>
+</div>
