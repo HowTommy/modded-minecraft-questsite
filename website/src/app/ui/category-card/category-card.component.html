@@ -1,4 +1,4 @@
-<ion-card button [routerLink]="['/category', category.numero]" class="category-card">
+<ion-card button [routerLink]="['/category', category.numero]" class="category-card" [class.completed]="stats.percentage === 100">
   <ion-card-header>
     <ion-card-title class="minecraft-font bold">{{ category.name }}</ion-card-title>
   </ion-card-header>

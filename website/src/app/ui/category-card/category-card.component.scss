@@ -8,10 +8,26 @@
     4px 4px 0 0 rgba(0, 0, 0, 0.3);
   border-radius: 0;
   margin: 8px;
-  transition: filter 0.2s;
+  transition: filter 0.2s, background 0.3s;
 
   &:hover {
     filter: brightness(1.1);
+  }
+
+  &.completed {
+    background: #4A5C3F;
+
+    ion-card-title {
+      color: #FFFFFF;
+    }
+
+    .points {
+      color: #FFFFFF !important;
+    }
+
+    .percentage {
+      color: #FFFFFF !important;
+    }
   }
 
   ion-card-title {
