@@ -16,15 +16,27 @@ ion-header {
       0 -2px 0 0 var(--minecraft-brown),
       0 2px 0 0 var(--minecraft-brown),
       -2px 0 0 0 var(--minecraft-brown),
-      2px 0 0 0 var(--minecraft-brown);
+      2px 0 0 0 var(--minecraft-brown),
+      0 0 20px rgba(255, 215, 0, 0.5);
     border-radius: 0;
     text-align: center;
     margin: 8px 16px 16px 16px;
+    animation: slideInBounce 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    position: relative;
+    overflow: visible;
+
+    .thumbs-up {
+      font-size: 48px;
+      animation: thumbsUpBounce 1s ease-in-out infinite;
+      display: inline-block;
+      margin-bottom: 8px;
+    }
 
     h1 {
       color: var(--minecraft-gold);
       font-size: 18px;
       margin: 0 0 12px 0;
+      animation: textGlow 2s ease-in-out infinite;
     }
 
     ion-button {
@@ -33,10 +45,59 @@ ion-header {
       --background-hover: var(--minecraft-dark-brown);
       --color: var(--minecraft-light-gray);
       --border-radius: 0;
+      --padding-start: 20px;
+      --padding-end: 20px;
       font-family: 'Minecraft', monospace;
       font-size: 14px;
-      margin: 0;
+      margin: 20px auto 0 auto;
+      animation: fadeIn 1s ease-in 0.5s both;
     }
+  }
+}
+
+@keyframes slideInBounce {
+  0% {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+  60% {
+    transform: translateY(10px);
+    opacity: 1;
+  }
+  80% {
+    transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes thumbsUpBounce {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-10px) scale(1.1);
+  }
+}
+
+@keyframes textGlow {
+  0%, 100% {
+    text-shadow: 0 0 5px var(--minecraft-gold);
+  }
+  50% {
+    text-shadow: 0 0 20px var(--minecraft-gold), 0 0 30px rgba(255, 215, 0, 0.5);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
 }
 

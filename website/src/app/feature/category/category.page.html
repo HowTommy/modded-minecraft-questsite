@@ -16,8 +16,9 @@
 
     <!-- Message de félicitations si toutes les quêtes sont complétées -->
     <div *ngIf="stats.percentage === 100" class="completion-message">
+      <div class="thumbs-up">👍</div>
       <h1 class="minecraft-font">Félicitations tu as complété toutes les quêtes !</h1>
-      <ion-button expand="block" (click)="goToHome()">
+      <ion-button (click)="goToHome()">
         Revenir au choix des catégories
       </ion-button>
     </div>
