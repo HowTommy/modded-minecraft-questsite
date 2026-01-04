@@ -1,6 +1,7 @@
 <ion-card [disabled]="locked" [class.locked]="locked" [class.completed]="completed" class="quest-card">
   <ion-item button (click)="expanded = !expanded" [disabled]="locked">
-    <ion-label>
+    <span class="quest-indicator" *ngIf="isCurrentQuest && !completed && !locked">!</span>
+    <ion-label [style.padding-left]="isCurrentQuest && !completed && !locked ? '40px' : '0'">
       <h2 class="minecraft-font">{{ quest.label }}</h2>
       <p>{{ getDifficultyStars() }} - {{ quest.points }} points</p>
     </ion-label>
@@ -12,7 +13,7 @@
     </div>
   </ion-item>
 
-  <ion-card-content *ngIf="expanded && !locked">
+  <ion-card-content *ngIf="expanded && !locked && quest.description">
     <div class="quest-description" *ngIf="quest.description">
       <p>{{ quest.description }}</p>
     </div>

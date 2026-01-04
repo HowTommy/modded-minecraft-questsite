@@ -23,12 +23,20 @@
 
 // Combined card styling with Minecraft aesthetic
 .minecraft-card {
-  background: var(--minecraft-brown);
+  background: var(--minecraft-light-brown);
   box-shadow:
-    0 -2px 0 0 var(--minecraft-dark-brown),
-    0 2px 0 0 var(--minecraft-dark-brown),
-    -2px 0 0 0 var(--minecraft-dark-brown),
-    2px 0 0 0 var(--minecraft-dark-brown),
+    0 -2px 0 0 var(--minecraft-brown),
+    0 2px 0 0 var(--minecraft-brown),
+    -2px 0 0 0 var(--minecraft-brown),
+    2px 0 0 0 var(--minecraft-brown),
     4px 4px 0 0 rgba(0, 0, 0, 0.3);
   border-radius: 0;
+
+  h2, ion-card-title {
+    color: #2a2a2a;
+  }
+
+  p {
+    color: #2a2a2a;
+  }
 }

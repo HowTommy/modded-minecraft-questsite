@@ -28,6 +28,7 @@
                 [quest]="quest"
                 [completed]="progress[quest.numero] || false"
                 [locked]="isQuestLocked(quest, category, progress)"
+                [isCurrentQuest]="isCurrentQuest(quest, category, progress)"
                 (toggle)="onQuestToggle(quest, category, progress[quest.numero] || false)">
               </app-quest-card>
             </div>

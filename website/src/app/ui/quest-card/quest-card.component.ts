@@ -15,6 +15,7 @@ export class QuestCardComponent {
   @Input() quest!: Quest;
   @Input() completed: boolean = false;
   @Input() locked: boolean = false;
+  @Input() isCurrentQuest: boolean = false;
   @Output() toggle = new EventEmitter<void>();
 
   expanded: boolean = false;

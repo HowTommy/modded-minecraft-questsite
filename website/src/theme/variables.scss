@@ -10,10 +10,11 @@
   --minecraft-gray: #555555;
   --minecraft-light-gray: #AAAAAA;
   --minecraft-stone-gray: #8B8B8B;
-  --minecraft-gold: #41347a;
+  --minecraft-gold: #ffcd33;
+  --minecraft-purple: #41347a;
 
   // Quest State Colors
-  --quest-locked: var(--minecraft-gray);
+  --quest-locked: #888;
   --quest-active: var(--minecraft-brown);
   --quest-completed: var(--minecraft-green);
 

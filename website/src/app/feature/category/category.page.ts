@@ -108,6 +108,22 @@ export class CategoryPage implements OnInit {
     return !progress[previousQuest.numero];
   }
 
+  isCurrentQuest(quest: Quest, category: Category, progress: QuestProgress): boolean {
+    // La quête ne doit pas être complétée ni lockée
+    if (progress[quest.numero] || this.isQuestLocked(quest, category, progress)) {
+      return false;
+    }
+
+    // C'est la première quête non complétée
+    for (const q of category.quests) {
+      if (!progress[q.numero] && !this.isQuestLocked(q, category, progress)) {
+        return q.numero === quest.numero;
+      }
+    }
+
+    return false;
+  }
+
   async onQuestToggle(quest: Quest, category: Category, currentlyCompleted: boolean): Promise<void> {
     this.progressService.toggleQuest(quest.numero);
 
