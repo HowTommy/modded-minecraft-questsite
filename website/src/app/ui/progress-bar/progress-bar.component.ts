@@ -13,4 +13,14 @@ import { CommonModule } from '@angular/common';
 export class ProgressBarComponent {
   @Input() currentPoints: number = 0;
   @Input() totalPoints: number = 1;
+
+  getProgressColor(): string {
+    const percentage = (this.currentPoints / this.totalPoints) * 100;
+
+    // Rouge à 0%, vert à 100%
+    // HSL: Rouge = 0°, Vert = 120°
+    const hue = (percentage / 100) * 120;
+
+    return `hsl(${hue}, 70%, 50%)`;
+  }
 }

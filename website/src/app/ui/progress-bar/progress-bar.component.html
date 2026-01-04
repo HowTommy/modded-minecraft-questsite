@@ -1,5 +1,5 @@
 <div class="progress-container">
-  <ion-progress-bar [value]="currentPoints / totalPoints"></ion-progress-bar>
+  <ion-progress-bar [value]="currentPoints / totalPoints" [style.--progress-background]="getProgressColor()"></ion-progress-bar>
   <div class="progress-text minecraft-font">
     {{ currentPoints }} / {{ totalPoints }} points ({{ ((currentPoints / totalPoints) * 100) | number:'1.0-0' }}%)
   </div>
