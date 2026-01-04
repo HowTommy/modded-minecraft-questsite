@@ -13,37 +13,34 @@
       [currentPoints]="stats.completedPoints"
       [totalPoints]="stats.totalPoints">
     </app-progress-bar>
+
+    <!-- Message de félicitations si toutes les quêtes sont complétées -->
+    <div *ngIf="stats.percentage === 100" class="completion-message">
+      <h1 class="minecraft-font">Félicitations tu as complété toutes les quêtes !</h1>
+      <ion-button expand="block" (click)="goToHome()">
+        Revenir au choix des catégories
+      </ion-button>
+    </div>
   </div>
 </ion-header>
 
 <ion-content class="minecraft-background">
   <ng-container *ngIf="category$ | async as category">
     <ng-container *ngIf="progress$ | async as progress">
-      <ng-container *ngIf="categoryStats$ | async as stats">
-        <ng-container *ngIf="questGroups$ | async as questGroups">
-
-          <!-- Message de félicitations si toutes les quêtes sont complétées -->
-          <div *ngIf="stats.percentage === 100" class="completion-message">
-            <h1 class="minecraft-font">Félicitations tu as complété toutes les quêtes !</h1>
-            <ion-button expand="block" (click)="goToHome()">
-              Revenir au choix des catégories
-            </ion-button>
+      <ng-container *ngIf="questGroups$ | async as questGroups">
+        <!-- Liste des quêtes -->
+        <div *ngFor="let group of questGroups" class="quest-group">
+          <div>
+            <app-quest-card
+              *ngFor="let quest of group.quests"
+              [quest]="quest"
+              [completed]="progress[quest.numero] || false"
+              [locked]="isQuestLocked(quest, category, progress)"
+              [isCurrentQuest]="isCurrentQuest(quest, category, progress)"
+              (toggle)="onQuestToggle(quest, category, progress[quest.numero] || false)">
+            </app-quest-card>
           </div>
-
-          <!-- Liste des quêtes -->
-          <div *ngFor="let group of questGroups" class="quest-group">
-            <div>
-              <app-quest-card
-                *ngFor="let quest of group.quests"
-                [quest]="quest"
-                [completed]="progress[quest.numero] || false"
-                [locked]="isQuestLocked(quest, category, progress)"
-                [isCurrentQuest]="isCurrentQuest(quest, category, progress)"
-                (toggle)="onQuestToggle(quest, category, progress[quest.numero] || false)">
-              </app-quest-card>
-            </div>
-          </div>
-        </ng-container>
+        </div>
       </ng-container>
     </ng-container>
   </ng-container>

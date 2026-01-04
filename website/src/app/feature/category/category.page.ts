@@ -96,18 +96,41 @@ export class CategoryPage implements OnInit {
   }
 
   isQuestLocked(quest: Quest, category: Category, progress: QuestProgress): boolean {
-    if (quest.parallelWithPrevious) {
-      return false;
-    }
-
     const questIndex = category.quests.findIndex(q => q.numero === quest.numero);
     if (questIndex === 0) {
       return false;
     }
 
     const previousQuest = category.quests[questIndex - 1];
-    return !progress[previousQuest.numero];
+
+    // Si la quête peut être faite en parallèle
+    if (quest.parallelWithPrevious) {
+      // Elle est locked si la quête précédente est locked
+      return this.isQuestLocked(previousQuest, category, progress);
+    }
+
+    // Si la quête n'est pas en parallèle, on doit trouver toutes les quêtes précédentes
+    // jusqu'au début du dernier groupe parallèle et vérifier qu'elles sont toutes complétées
+    let checkIndex = questIndex - 1;
+
+    // Trouver le début du groupe parallèle précédent
+    while (checkIndex > 0 && category.quests[checkIndex].parallelWithPrevious) {
+      checkIndex--;
+    }
+
+    // Vérifier que toutes les quêtes depuis checkIndex jusqu'à questIndex - 1 sont complétées
+    for (let i = checkIndex; i < questIndex; i++) {
+      const questToCheck = category.quests[i];
+
+      // Cette quête doit être complétée
+      if (!progress[questToCheck.numero]) {
+        return true;
+      }
+    }
+
+    return false;
   }
+
 
   isCurrentQuest(quest: Quest, category: Category, progress: QuestProgress): boolean {
     // La quête ne doit pas être complétée ni lockée
@@ -115,11 +138,38 @@ export class CategoryPage implements OnInit {
       return false;
     }
 
-    // C'est la première quête non complétée
+    // Trouver la première quête non complétée et non lockée
+    let firstAvailableQuest: Quest | null = null;
     for (const q of category.quests) {
       if (!progress[q.numero] && !this.isQuestLocked(q, category, progress)) {
-        return q.numero === quest.numero;
+        firstAvailableQuest = q;
+        break;
       }
+    }
+
+    if (!firstAvailableQuest) {
+      return false;
+    }
+
+    // Si c'est la première quête disponible, elle est current
+    if (quest.numero === firstAvailableQuest.numero) {
+      return true;
+    }
+
+    // Si la quête peut être faite en parallèle avec la première quête disponible,
+    // elle est aussi current
+    const questIndex = category.quests.findIndex(q => q.numero === quest.numero);
+    const firstAvailableIndex = category.quests.findIndex(q => q.numero === firstAvailableQuest!.numero);
+
+    if (questIndex > firstAvailableIndex && quest.parallelWithPrevious) {
+      // Vérifier si toutes les quêtes entre la première disponible et celle-ci
+      // sont aussi en parallèle
+      for (let i = firstAvailableIndex + 1; i <= questIndex; i++) {
+        if (!category.quests[i].parallelWithPrevious) {
+          return false;
+        }
+      }
+      return true;
     }
 
     return false;

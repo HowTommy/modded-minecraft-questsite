@@ -8,34 +8,35 @@ ion-header {
   margin-bottom: 0;
 }
 
-.completion-message {
-  margin: 24px 16px;
-  padding: 24px;
-  background: var(--minecraft-light-brown);
-  box-shadow:
-    0 -2px 0 0 var(--minecraft-brown),
-    0 2px 0 0 var(--minecraft-brown),
-    -2px 0 0 0 var(--minecraft-brown),
-    2px 0 0 0 var(--minecraft-brown),
-    4px 4px 0 0 rgba(0, 0, 0, 0.3);
-  border-radius: 0;
-  text-align: center;
+.page-progress-stats {
+  .completion-message {
+    padding: 16px;
+    background: var(--minecraft-light-brown);
+    box-shadow:
+      0 -2px 0 0 var(--minecraft-brown),
+      0 2px 0 0 var(--minecraft-brown),
+      -2px 0 0 0 var(--minecraft-brown),
+      2px 0 0 0 var(--minecraft-brown);
+    border-radius: 0;
+    text-align: center;
+    margin: 8px 16px 16px 16px;
 
-  h1 {
-    color: var(--minecraft-gold);
-    font-size: 24px;
-    margin-bottom: 20px;
-  }
+    h1 {
+      color: var(--minecraft-gold);
+      font-size: 18px;
+      margin: 0 0 12px 0;
+    }
 
-  ion-button {
-    --background: var(--minecraft-brown);
-    --background-activated: var(--minecraft-dark-brown);
-    --background-hover: var(--minecraft-dark-brown);
-    --color: var(--minecraft-light-gray);
-    --border-radius: 0;
-    font-family: 'Minecraft', monospace;
-    font-size: 16px;
-    margin-top: 12px;
+    ion-button {
+      --background: var(--minecraft-brown);
+      --background-activated: var(--minecraft-dark-brown);
+      --background-hover: var(--minecraft-dark-brown);
+      --color: var(--minecraft-light-gray);
+      --border-radius: 0;
+      font-family: 'Minecraft', monospace;
+      font-size: 14px;
+      margin: 0;
+    }
   }
 }
 
