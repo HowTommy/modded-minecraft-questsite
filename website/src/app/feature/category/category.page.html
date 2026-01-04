@@ -16,27 +16,25 @@
   </div>
 </ion-header>
 
-<ion-content>
-  <div class="minecraft-background">
-    <ng-container *ngIf="category$ | async as category">
-      <ng-container *ngIf="progress$ | async as progress">
-        <ng-container *ngIf="questGroups$ | async as questGroups">
-          <div *ngFor="let group of questGroups" class="quest-group">
-            <div>
-              <app-quest-card
-                *ngFor="let quest of group.quests"
-                [quest]="quest"
-                [completed]="progress[quest.numero] || false"
-                [locked]="isQuestLocked(quest, category, progress)"
-                [isCurrentQuest]="isCurrentQuest(quest, category, progress)"
-                (toggle)="onQuestToggle(quest, category, progress[quest.numero] || false)">
-              </app-quest-card>
-            </div>
+<ion-content class="minecraft-background">
+  <ng-container *ngIf="category$ | async as category">
+    <ng-container *ngIf="progress$ | async as progress">
+      <ng-container *ngIf="questGroups$ | async as questGroups">
+        <div *ngFor="let group of questGroups" class="quest-group">
+          <div>
+            <app-quest-card
+              *ngFor="let quest of group.quests"
+              [quest]="quest"
+              [completed]="progress[quest.numero] || false"
+              [locked]="isQuestLocked(quest, category, progress)"
+              [isCurrentQuest]="isCurrentQuest(quest, category, progress)"
+              (toggle)="onQuestToggle(quest, category, progress[quest.numero] || false)">
+            </app-quest-card>
           </div>
-        </ng-container>
+        </div>
       </ng-container>
     </ng-container>
-  </div>
+  </ng-container>
 </ion-content>
 
 <app-confetti [trigger$]="animationService.triggerConfetti$"></app-confetti>

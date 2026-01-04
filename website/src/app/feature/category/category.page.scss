@@ -1,8 +1,11 @@
-.minecraft-background {
-  --background: #9DC183;
-  background-image: url("/assets/grass.jpg");
-  background-repeat: repeat;
-  height: 100%;
+ion-content.minecraft-background {
+  --background: #9DC183 url("/assets/grass.jpg") repeat;
+  --padding-top: 0;
+  --padding-bottom: 0;
+}
+
+ion-header {
+  margin-bottom: 0;
 }
 
 .quest-group {
