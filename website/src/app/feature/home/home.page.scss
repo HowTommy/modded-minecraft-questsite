@@ -1,0 +1,33 @@
+ion-header {
+  ion-toolbar {
+    --background: var(--minecraft-brown);
+
+    ion-title {
+      font-size: 24px;
+    }
+
+    ion-button {
+      --color: var(--minecraft-light-gray);
+    }
+  }
+}
+
+.minecraft-background {
+  --background: #9DC183;
+  background-image: url("/assets/grass.jpg");
+  background-repeat: repeat;
+  height: 100%;
+}
+
+ion-grid {
+  padding: 16px;
+}
+
+ion-col {
+  display: flex;
+
+  app-category-card {
+    width: 100%;
+    display: block;
+  }
+}

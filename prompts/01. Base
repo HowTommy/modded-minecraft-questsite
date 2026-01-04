@@ -1,0 +1,16 @@
+J'ai mon app angular et ionic que tu peux voir ici dans le dossier website. J'aimerais que tu modifies tout pour créer un site spécial. Déjà il doit être pensé pour être ouvert en
+  web sur ordinateur. Il doit en priorité utiliser les composants ionic, et le design ionic. https://ionicframework.com/docs/components Evite de faire trop de CSS custom. Maintenant voilà l'objectif du site
+  : je veux que tu crées un site de quêtes pour Minecraft. Je veux un design un peu rétro style minecraft. Les quêtes sont découpées en catégories. Chaque catégorie doit avoir sa page. Sur une page on voit
+  ensuite les quêtes à faire, avec parfois plusieurs quêtes qui peuvent être faites en parallèle. Mais en général les quêtes se feront les unes à la suite des autres (pour débloquer la quête suivante il faut
+  finir la quête précédente). Chaque quête donne des points de haut fait. En permanence à l'écran, sur l'écran d'une catégorie, on voit une barre d'accomplissement avec le nombre de points débloqués sur le
+  total. On a aussi une barre sur la page d'accueil (qui montre toutes les catégories) on voit le total : nombre de points de haut fait sur le total. Tu peux trouver dans ce ficher @french.csv la liste des
+  catégories et quêtes de base. Je veux que sur la home chaque catégorie montre le % d'accomplissement avec les points de haut fait gagnés. Les points de haut fait sont calculés comme suit : 10x la
+  difficulté de la quête. Ensuite quand on est sur l'écran d'une catégorie on voit la liste des quêtes. Quand on click sur une quête on a le détail qui se déplie et un  bouton : Marquer comme complétée. Et
+  si la quête est marquée comme complétée, on a un bouton "Pas complétée". L'état des quêtes réussies doit pour le moment être sauvegardé dans le local storage. L'objectif est que le site soit engageant et
+  donne envie et du plaisir à aller cocher les quêtes. Quand une quête est réussie il doit y avoir une petite animation qui montre l'évolution des points de haut fait, le gain opéré, et la quête doit avoir
+  une marque verte.
+
+  Users can have a "reset full progress" but it should have a DOUBLE CONFIRMATION before erasing everything. Yes parallel quests should appear side by side. CSV data should be loaded dynamically. No sound
+    effects, only visual animations. Angular 20, Ionic 8. Ionic components. Start fresh for the routing. Yes use minecraft font. Yes minecraft inspired colors. Yes locked quests should be grayed out. The
+    progress bar should be sticky at the top of the screen. Quest completion are stored globally by quest numero. Yes I want export/import features for progress data. For quest completion I want a simple fade
+    in toast. For category "all quests completion" I want the big show : confetti, particles, ... The progress bar should animate smoothly yes. No animation preferences.

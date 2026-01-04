@@ -1,0 +1,11 @@
+<ion-card button [routerLink]="['/category', category.numero]" class="category-card">
+  <ion-card-header>
+    <ion-card-title class="minecraft-font bold">{{ category.name }}</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <div class="stats">
+      <div class="percentage minecraft-font">{{ stats.percentage | number:'1.0-0' }}%</div>
+      <div class="points">{{ stats.completedPoints }} / {{ stats.totalPoints }} points</div>
+    </div>
+  </ion-card-content>
+</ion-card>

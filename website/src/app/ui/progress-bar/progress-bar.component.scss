@@ -1,0 +1,22 @@
+.progress-container {
+  padding: 8px 16px;
+}
+
+ion-progress-bar {
+  height: 30px;
+  border-radius: 0;
+  transition: all 0.5s ease-out;
+  --background: #BBB;
+  --progress-background: #00bf00;
+  box-shadow:
+    0 -2px 0 0 rgba(0, 0, 0, 0.3),
+    0 2px 0 0 rgba(0, 0, 0, 0.3),
+    inset 0 2px 0 0 rgba(0, 0, 0, 0.2);
+}
+
+.progress-text {
+  margin-top: 12px;
+  text-align: center;
+  color: var(--minecraft-gold);
+  font-size: 14px;
+}

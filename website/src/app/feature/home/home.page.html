@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title class="minecraft-font bold">ListenTommy's Minecraft Server Quests</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="exportProgress()">
+        <ion-icon slot="icon-only" name="download"></ion-icon>
+      </ion-button>
+      <ion-button (click)="importProgress()">
+        <ion-icon slot="icon-only" name="cloud-upload"></ion-icon>
+      </ion-button>
+      <ion-button (click)="resetProgress()">
+        <ion-icon slot="icon-only" name="trash"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+  <div *ngIf="globalStats$ | async as globalStats" class="page-progress-stats">
+    <app-progress-bar
+      [currentPoints]="globalStats.completedPoints"
+      [totalPoints]="globalStats.totalPoints">
+    </app-progress-bar>
+  </div>
+</ion-header>
+
+<ion-content>
+  <div class="container minecraft-background">
+    <ion-grid>
+      <ion-row>
+        <ng-container *ngIf="categories$ | async as categories">
+          <ng-container *ngIf="categoryStats$ | async as statsMap">
+            <ion-col
+              *ngFor="let category of categories"
+              size="12"
+              size-md="6"
+              size-lg="4">
+              <app-category-card
+                [category]="category"
+                [stats]="getCategoryStats(category.numero, statsMap)">
+              </app-category-card>
+            </ion-col>
+          </ng-container>
+        </ng-container>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

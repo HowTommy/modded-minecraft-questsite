@@ -1,0 +1,20 @@
+<ion-card [disabled]="locked" [class.locked]="locked" [class.completed]="completed" class="quest-card">
+  <ion-item button (click)="expanded = !expanded" [disabled]="locked">
+    <ion-label>
+      <h2 class="minecraft-font">{{ quest.label }}</h2>
+      <p>{{ getDifficultyStars() }} - {{ quest.points }} points</p>
+    </ion-label>
+    <ion-icon name="lock-closed" slot="end" *ngIf="locked"></ion-icon>
+    <div class="minecraft-checkbox" slot="end" *ngIf="!locked" (click)="toggle.emit(); $event.stopPropagation()">
+      <div class="checkbox-box" [class.checked]="completed">
+        <div class="checkmark" *ngIf="completed">✓</div>
+      </div>
+    </div>
+  </ion-item>
+
+  <ion-card-content *ngIf="expanded && !locked">
+    <div class="quest-description" *ngIf="quest.description">
+      <p>{{ quest.description }}</p>
+    </div>
+  </ion-card-content>
+</ion-card>

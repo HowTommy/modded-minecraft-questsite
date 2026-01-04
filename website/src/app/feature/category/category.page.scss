@@ -1,0 +1,30 @@
+.sticky-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+
+  ion-toolbar {
+    --background: var(--minecraft-brown);
+  }
+}
+
+.minecraft-background {
+  --background: #9DC183;
+  background-image: url("/assets/grass.jpg");
+  background-repeat: repeat;
+  height: 100%;
+}
+
+.quest-group {
+  margin-bottom: 8px;
+
+  ion-row {
+    display: flex;
+    gap: 8px;
+    padding: 0 8px;
+
+    ion-col {
+      padding: 0;
+    }
+  }
+}

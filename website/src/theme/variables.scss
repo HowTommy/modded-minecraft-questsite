@@ -1,2 +1,27 @@
 // For information on how to create your own theme, please refer to:
 // https://ionicframework.com/docs/theming/
+
+:root {
+  // Minecraft Color Palette
+  --minecraft-brown: #8B4513;
+  --minecraft-dark-brown: #654321;
+  --minecraft-light-brown: #C19A6B;
+  --minecraft-green: #6E8A53;
+  --minecraft-gray: #555555;
+  --minecraft-light-gray: #AAAAAA;
+  --minecraft-stone-gray: #8B8B8B;
+  --minecraft-gold: #41347a;
+
+  // Quest State Colors
+  --quest-locked: var(--minecraft-gray);
+  --quest-active: var(--minecraft-brown);
+  --quest-completed: var(--minecraft-green);
+
+  // Ionic Color Overrides
+  --ion-color-primary: #8B8B8B;
+  --ion-color-primary-rgb: 139,139,139;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255,255,255;
+  --ion-color-primary-shade: #7a7a7a;
+  --ion-color-primary-tint: #979797;
+}

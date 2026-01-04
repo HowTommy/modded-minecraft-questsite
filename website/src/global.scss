@@ -35,3 +35,30 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import '@ionic/angular/css/palettes/dark.system.css';
+
+/**
+ * Minecraft Font
+ * -----------------------------------------------------
+ */
+@font-face {
+  font-family: 'Minecraft';
+  src: url('/assets/fonts/minecraft.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.minecraft-font {
+  font-family: 'Minecraft', monospace;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.page-progress-stats {
+  padding-top: 10px;
+  background-color: #eee;
+}
+
+// Import Minecraft theme utilities
+@import './theme/minecraft-theme.scss';

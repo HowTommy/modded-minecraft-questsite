@@ -1,0 +1,99 @@
+.quest-card {
+  margin: 12px 8px;
+  border-radius: 0;
+  box-shadow:
+    0 -1px 0 0 var(--minecraft-dark-brown),
+    0 1px 0 0 var(--minecraft-dark-brown),
+    -1px 0 0 0 var(--minecraft-dark-brown),
+    1px 0 0 0 var(--minecraft-dark-brown);
+
+  background: var(--quest-active);
+
+  &.locked {
+    background: var(--quest-locked);
+    opacity: 0.6;
+  }
+
+  &.completed {
+    background: rgba(85, 255, 85, 0.1);
+    border-left: 4px solid var(--quest-completed);
+  }
+
+  ion-item {
+    --background: transparent;
+
+    h2 {
+      color: var(--minecraft-light-gray);
+      font-size: 16px;
+    }
+
+    p {
+      color: #5FCDE4;
+      font-size: 12px;
+    }
+  }
+}
+
+.minecraft-checkbox {
+  cursor: pointer;
+  padding: 4px;
+
+  .checkbox-box {
+    width: 32px;
+    height: 32px;
+    background: #CCCCCC;
+    box-shadow:
+      0 -2px 0 0 #000000,
+      0 2px 0 0 #000000,
+      -2px 0 0 0 #000000,
+      2px 0 0 0 #000000,
+      inset 2px 2px 0 0 #FFFFFF,
+      inset -2px -2px 0 0 #666666;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.1s;
+
+    &.checked {
+      background: var(--minecraft-green);
+    }
+
+    .checkmark {
+      font-size: 24px;
+      color: #000000;
+      font-weight: bold;
+      line-height: 1;
+    }
+  }
+
+  &:hover .checkbox-box {
+    filter: brightness(1.1);
+  }
+}
+
+.quest-description {
+  margin-bottom: 16px;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 0;
+
+  p {
+    margin: 0;
+    color: var(--minecraft-light-gray);
+  }
+}
+
+ion-card-content {
+  animation: expandIn 0.2s ease-out;
+}
+
+@keyframes expandIn {
+  from {
+    opacity: 0;
+    max-height: 0;
+  }
+  to {
+    opacity: 1;
+    max-height: 500px;
+  }
+}

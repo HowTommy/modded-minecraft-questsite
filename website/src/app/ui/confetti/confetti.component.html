@@ -1,0 +1,9 @@
+<div class="confetti-container">
+  <div
+    *ngFor="let particle of particles; trackBy: trackById"
+    class="particle"
+    [style.left.%]="particle.left"
+    [style.background-color]="particle.color"
+    [style.animation-delay.s]="particle.delay">
+  </div>
+</div>

@@ -1,0 +1,41 @@
+<ion-header class="sticky-header">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="minecraft-font bold" *ngIf="category$ | async as category">
+      {{ category.name }}
+    </ion-title>
+  </ion-toolbar>
+
+  <div *ngIf="categoryStats$ | async as stats" class="page-progress-stats">
+    <app-progress-bar
+      [currentPoints]="stats.completedPoints"
+      [totalPoints]="stats.totalPoints">
+    </app-progress-bar>
+  </div>
+</ion-header>
+
+<ion-content>
+  <div class="minecraft-background">
+    <ng-container *ngIf="category$ | async as category">
+      <ng-container *ngIf="progress$ | async as progress">
+        <ng-container *ngIf="questGroups$ | async as questGroups">
+          <div *ngFor="let group of questGroups" class="quest-group">
+            <div>
+              <app-quest-card
+                *ngFor="let quest of group.quests"
+                [quest]="quest"
+                [completed]="progress[quest.numero] || false"
+                [locked]="isQuestLocked(quest, category, progress)"
+                (toggle)="onQuestToggle(quest, category, progress[quest.numero] || false)">
+              </app-quest-card>
+            </div>
+          </div>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+  </div>
+</ion-content>
+
+<app-confetti [trigger$]="animationService.triggerConfetti$"></app-confetti>
