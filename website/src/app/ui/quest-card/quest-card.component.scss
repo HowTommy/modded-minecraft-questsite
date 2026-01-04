@@ -18,8 +18,18 @@
     background: #4A5C3F;
 
     ion-item {
-      h2, p {
+      h2 {
         color: #FFFFFF;
+        opacity: 0.8;
+      }
+
+      .diamond-icon {
+        filter: brightness(0) invert(1);
+        opacity: 0.8;
+      }
+
+      ion-button {
+        --color: #FFFFFF;
         opacity: 0.8;
       }
     }
@@ -32,12 +42,28 @@
     h2 {
       color: #2a2a2a;
       font-size: 16px;
+      margin-bottom: 4px;
     }
 
-    p {
-      color: #5FCDE4;
-      font-size: 12px;
+    ion-button {
+      --color: #5FCDE4;
+      font-size: 11px;
+      text-transform: none;
+      margin-right: 4px;
     }
+  }
+
+  .difficulty-container {
+    display: flex;
+    gap: 2px;
+    align-items: center;
+    margin-top: 2px;
+  }
+
+  .diamond-icon {
+    height: 23px;
+    width: auto;
+    image-rendering: pixelated;
   }
 }
 

@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IonicModule, ToastController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { Observable, combineLatest } from 'rxjs';
@@ -36,6 +36,7 @@ export class CategoryPage implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private questDataService: QuestDataService,
     private progressService: ProgressService,
     public animationService: AnimationService,
@@ -155,5 +156,9 @@ export class CategoryPage implements OnInit {
       });
       await toast.present();
     }
+  }
+
+  goToHome(): void {
+    this.router.navigate(['/home']);
   }
 }

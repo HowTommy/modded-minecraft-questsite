@@ -20,7 +20,12 @@ export class QuestCardComponent {
 
   expanded: boolean = false;
 
-  getDifficultyStars(): string {
-    return '◆'.repeat(this.quest.difficulty);
+  getDiamonds(): number[] {
+    return Array(this.quest.difficulty).fill(0);
+  }
+
+  toggleExpand(event: Event): void {
+    event.stopPropagation();
+    this.expanded = !this.expanded;
   }
 }
